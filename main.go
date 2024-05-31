@@ -30,3 +30,8 @@ func main() {
 		log.Fatal("Failed to start server: ", err)
 	}
 }
+
+/*	todo 	-verification einlesen und abspeichern
+/	todo 	-anzeigen
+/	todo	-frontend designen
+*/
