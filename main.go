@@ -33,5 +33,5 @@ func main() {
 
 /*	todo 	-verification einlesen und abspeichern
 /	todo 	-anzeigen
-/	todo	-frontend designen
+/	todo	-frontend designen (soll ansehnlich sein)
 */
