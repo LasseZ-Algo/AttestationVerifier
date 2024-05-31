@@ -1,11 +1,23 @@
 package models
 
-import "time"
-
 type AttestationReport struct {
-	ID        uint      `gorm:"primaryKey"`
-	Policy    string    `json:"policy"`
-	CertChain string    `json:"cert_chain"`
-	Signature string    `json:"signature"`
-	CreatedAt time.Time `json:"created_at"`
+	TestString string `json:"testString"`
 }
+
+//todo sinnvolle Struktur hinzufügen
+/*
+			Version
+			Source
+			Protocol
+			Instance
+
+				Attestation:
+				Version
+				Product
+				Report
+				Data
+
+		Vorher oder nachher enthashen?
+
+	Beide Reports enthalten unterschiedliche Attribute
+*/

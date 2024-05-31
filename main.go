@@ -5,33 +5,33 @@ import (
 	"AttestationVerifier/database"
 	"github.com/gin-gonic/gin"
 	"log"
+	"net/http"
 )
 
 func main() {
 	r := gin.Default()
 
-	// Datenbankverbindung und Migration
+	r.Static("/frontEnd", "./frontEnd")
+	r.LoadHTMLGlob("frontEnd/htmls/*")
+
 	database.Connect()
 	database.Migrate()
 
-	// Statische Dateien bereitstellen
-	r.Static("/frontEnd", "./frontEnd")
+	r.GET("/", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "index.html", nil)
+	})
 
-	// HTML-Template rendern
-	r.LoadHTMLGlob("frontEnd/templates/*")
-
-	// Routen einrichten
 	r.POST("/report/upload", controllers.UploadReport)
 	r.GET("/report/:report_id", controllers.VerifyReport)
 
-	// Server starten
 	err := r.Run(":8080")
 	if err != nil {
 		log.Fatal("Failed to start server: ", err)
 	}
 }
 
-/*	todo 	-verification einlesen und abspeichern
+/*	todo 	-text hochladen können
+/	todo 	-verification einlesen und abspeichern
 /	todo 	-anzeigen
 /	todo	-frontend designen (soll ansehnlich sein)
 */

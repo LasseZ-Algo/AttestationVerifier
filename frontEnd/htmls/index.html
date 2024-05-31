@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Upload</title>
+    <link rel="stylesheet" href="/frontEnd/css/style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Upload Text to Database</h1>
+    <form action="/report/upload" method="POST" enctype="multipart/form-data">
+        <label for="text">Enter your text:</label><br>
+        <textarea id="text" name="text" rows="4" cols="50"></textarea><br><br>
+        <input type="submit" value="Upload">
+    </form>
+</div>
+</body>
+</html>
