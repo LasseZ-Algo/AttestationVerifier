@@ -14,6 +14,12 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
+/*
+TODO:
+- Optimise Frontend
+- Fancy Frontend
+*/
+
 // JSONReport represents the structure of the incoming JSON report
 // make dynamic type based on reportz??
 type JSONReport struct {
