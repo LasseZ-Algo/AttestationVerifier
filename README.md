@@ -1,35 +1,32 @@
+# Attestation Report Verifizierungs-Webserver
 
-Attestation Report Verification
+Dieses Projekt implementiert einen Webserver zur Verifizierung von Attestation Reports. Die Berichte werden über einen HTTP-Endpunkt empfangen, verifiziert und in einer SQLite-Datenbank gespeichert.
 
-Overview
-This project is designed to verify Attestation Reports for AMD-SEV-SNP. Follow the instructions below to get started with the pre-built version or build it yourself from source.
+## Features
 
-Getting Started
-1. Download & Run Pre-built Version
-Extract the zip file:
+- **Report-Verifizierung**: Verifiziert Attestation Reports mit dem `go-sev-guest/verify`-Paket.
+- **SQLite-Integration**: Speichert die Berichte und deren Verifizierungsstatus.
+- **HTTP-API**: Akzeptiert Berichte über den `/verify`-Endpunkt.
+- **Sicherheit**: Schutz vor SQL-Injections und validierte Eingaben.
 
-Unzip the downloaded file into your preferred directory.
-Run the application:
+## Installation
 
-Execute main.exe from the extracted files.
-Access the project:
+1. Repository klonen.
+2. Abhängigkeiten installieren:
+   ```bash
+   go mod tidy
+   ```
+3. Webserver starten:
+   ```bash
+   go run main.go
+   ```
 
-Open a web browser and go to http://localhost:3001 to view and interact with the project.
+## API-Endpunkte
 
+- `POST /verify`: Nimmt eine Datei entgegen und verifiziert den Attestation Report.
 
-2. Build from Source
-If you prefer to build the project yourself, follow these steps:
+## Abhängigkeiten
 
-Install GCC:
-
-Make sure GCC is installed on your system. You can download it from GCC official site.
-Open the source code:
-
-Navigate to the project directory and open main.go.
-Build the project:
-
-Run the following command in your terminal:
-go build .\main.go
-Run the built application:
-
-After building, run the generated executable and follow the same steps to access the project in your browser.
+- [go-sev-guest](https://github.com/google/go-sev-guest)
+- [Gin Framework](https://github.com/gin-gonic/gin)
+- [SQLite für Go](https://github.com/mattn/go-sqlite3)
