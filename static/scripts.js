@@ -35,14 +35,22 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 
     function uploadFile(file) {
-        fileInput.files = new DataTransfer().files; // Reset input to handle same file upload
-        fileInput.files = new FileListItems([file]);
+        const dataTransfer = new DataTransfer();
+        dataTransfer.items.add(file);
+        fileInput.files = dataTransfer.files;
         fileMsg.textContent = file.name;
     }
 
     fakeBtn.addEventListener('click', (e) => {
-        e.preventDefault(); // Prevent default behavior which might cause double opening
+        e.preventDefault();
         fileInput.click();
+    });
+
+    fileInput.addEventListener('change', function(e) {
+        if (fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+            fileMsg.textContent = file.name;
+        }
     });
 
     // Form submission via fetch
@@ -71,9 +79,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
         })
         .catch(error => {
             console.error('Error:', error);
-            document.getElementById('result').textContent = 'An error occurred.';
-            document.getElementById('result').className = 'result error';
-            document.getElementById('result').style.display = 'block';
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = 'An error occurred.';
+            resultDiv.className = 'result error';
+            resultDiv.style.display = 'block';
         });
     });
 });

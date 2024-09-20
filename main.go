@@ -9,7 +9,7 @@ import (
 	"io"
 	"log"
 	"net/http"
-	"strings" // Added import for string manipulation
+	"strings"
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/go-sev-guest/verify"
@@ -83,7 +83,7 @@ func checkAndAddReport(report string) (bool, bool, error) {
 			return false, false, err
 		}
 	} else if err != nil {
-		return false, false, err // Handle other database errors
+		return false, false, err
 	} else {
 		exists = true
 	}
@@ -150,7 +150,6 @@ func main() {
 		}
 		defer f.Close()
 
-		// Read the entire file into a byte slice
 		fileBytes, err := io.ReadAll(f)
 		if err != nil {
 			log.Printf("Failed to read file: %v", err)
@@ -158,17 +157,11 @@ func main() {
 			return
 		}
 
-		// Convert byte slice to string for preprocessing
 		bodyString := string(fileBytes)
 
-		// **Preprocessing Step: Correct the malformed "pcrs" key**
 		// Replace 'pcrs:{' with '"pcrs":{'
 		fixedBodyString := strings.ReplaceAll(bodyString, `pcrs:{`, `"pcrs":{`)
 
-		// Optionally, log the correction for debugging purposes
-		// log.Printf("Fixed JSON: %s", fixedBodyString)
-
-		// Convert the fixed string back to byte slice
 		fixedBodyBytes := []byte(fixedBodyString)
 
 		var jsonReport map[string]interface{}
@@ -213,8 +206,6 @@ func main() {
 		eventLogField, eventLogExists := attestation["EventLog"]
 		quoteField, quoteExists := attestation["Quote"]
 
-		// You can extend this section to handle additional dynamic fields as needed
-
 		// Prepare report details
 		reportDetails := gin.H{
 			"Source":   source,
@@ -249,10 +240,10 @@ func main() {
 		c.JSON(http.StatusOK, response)
 	})
 
-	// Serve static files (e.g., CSS, JS)
+	// Serve static files
 	r.Static("/static", "./static")
 
-	// Serve index.html as the default page
+	// Serve index.html
 	r.GET("/", func(c *gin.Context) {
 		c.File("static/index.html")
 	})
