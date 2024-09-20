@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Attestation Report Verifier</title>
-    <link rel="stylesheet" href="/static/restyle.css"> 
+    <title>Enclaive ARV</title>
+    <link rel="stylesheet" href="/static/style.css"> 
 </head>
 <body>
     <div class="container">
-        <h1>Attestation Report Verification</h1>
+        <h1>Attestation Report Verification (Envlaive ARV)</h1>
         <form id="verifyForm" action="/verify" method="post" enctype="multipart/form-data">
             <div class="file-drop-area">
                 <label for="fileInput" class="fake-btn">Choose a file</label>
@@ -18,11 +18,13 @@
             <input type="submit" value="Verify Report" class="submit-btn">
         </form>
         <div id="result" class="result"></div>
+        <div id="result" class="result"></div>
         <div id="reportDetails" class="report-details" style="display:none;">
             <div>Source: <span id="source"></span></div>
             <div>Protocol: <span id="protocol"></span></div>
             <div>Product: <span id="product"></span></div>
         </div>
+    </div>
     </div>
     <script src="/static/scripts.js"></script>
 </body>

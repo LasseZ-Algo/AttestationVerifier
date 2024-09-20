@@ -34,22 +34,38 @@ document.addEventListener('DOMContentLoaded', (event) => {
         ([...files]).forEach(uploadFile);
     }
 
+    function updateFileDisplay() {
+        if (fileInput.files.length > 0) {
+            const fileName = fileInput.files[0].name;
+            fakeBtn.textContent = fileName;
+            fileMsg.textContent = "Click again to change " + fileName;
+            fakeBtn.classList.add('remove-btn');
+        }
+    }
+    
+    fileInput.addEventListener('change', (e) => {
+        updateFileDisplay();
+    });
+    
     function uploadFile(file) {
         const dataTransfer = new DataTransfer();
         dataTransfer.items.add(file);
         fileInput.files = dataTransfer.files;
-        fileMsg.textContent = file.name;
+        updateFileDisplay();
     }
 
     fakeBtn.addEventListener('click', (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Prevent default behavior which might cause double opening
         fileInput.click();
     });
 
-    fileInput.addEventListener('change', function(e) {
+
+    fileInput.addEventListener('change', (e) => {
         if (fileInput.files.length > 0) {
-            const file = fileInput.files[0];
-            fileMsg.textContent = file.name;
+            const fileName = fileInput.files[0].name;
+            fakeBtn.textContent = fileName;
+            fileMsg.textContent = "Click again to change " + fileName;
+            fakeBtn.classList.add('remove-btn');
         }
     });
 
@@ -79,10 +95,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
         })
         .catch(error => {
             console.error('Error:', error);
-            const resultDiv = document.getElementById('result');
-            resultDiv.textContent = 'An error occurred.';
-            resultDiv.className = 'result error';
-            resultDiv.style.display = 'block';
+            document.getElementById('result').textContent = 'An error occurred.';
+            document.getElementById('result').className = 'result error';
+            document.getElementById('result').style.display = 'block';
         });
     });
 });
